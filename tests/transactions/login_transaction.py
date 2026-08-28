@@ -1,11 +1,13 @@
+from guara.transaction import AbstractTransaction
 from tests.pages.login_page import LoginPage
 
-class LoginTransation:
-    def __init__(self, driver):
-        self.login_page = LoginPage(driver)
 
-    def realizar_login(self, usuario, senha):
-        self.login_page.acessar()
-        self.login_page.preencher_usuario(usuario)
-        self.login_page.preencher_senha(senha)
-        self.login_page.click_login_button()
+class LoginTransaction(AbstractTransaction):
+
+    def do(self, url, user, password):
+        self._driver.get(url)
+
+        page = LoginPage(self._driver)
+        page.login(user, password)
+
+        return self._driver.current_url
