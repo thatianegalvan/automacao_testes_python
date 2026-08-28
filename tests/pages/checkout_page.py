@@ -20,5 +20,5 @@ class CheckoutPage(BasePage):
         self.click(*self.CONTINUE)
     def finish(self):
         self.click(*self.FINISH)
-    def get_success_message(self):
-        return self.get_text(*self.SUCCESS_MSG)
+        def get_success_message(self):
+            return self.get_text(*self.SUCCESS_MSG)
