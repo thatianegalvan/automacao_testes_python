@@ -42,3 +42,5 @@ def step_continue_shopping(context):
 @then("deve ser redirecionado de volta para a página de inventário")
 def step_validate_return_to_inventory(context):
     assert "inventory" in context.driver.current_url
+
+
