@@ -6,7 +6,6 @@ class AddToCartTransaction(AbstractTransaction):
 
     def do(self):
         page = InventoryPage(self._driver)
-
         page.add_product()
         page.go_to_cart()
 

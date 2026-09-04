@@ -16,3 +16,6 @@ class BasePage:
 
     def get_text(self, by, value):
         return self.find(by, value).text
+    
+    def is_displayed(self, by, value):
+        return self.find(by, value).is_displayed()

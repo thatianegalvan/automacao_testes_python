@@ -2,7 +2,7 @@ from guara.transaction import AbstractTransaction
 from tests.pages.login_page import LoginPage
 
 
-class LoginTransaction(AbstractTransaction):
+class LoginWith(AbstractTransaction):
 
     def do(self, url, user, password):
         self._driver.get(url)
