@@ -4,6 +4,9 @@ Feature: Checkout
         Given que o usuário está logado
 
     Scenario: Compra de produto com sucesso
+        When o usuário acessa o carrinho
+        Then o carrinho deve estar vazio
+        When o usuário retorna para a página de produtos 
         Given o usuário adiciona o produto "Sauce Labs Bike Light" ao carrinho
         When o usuário acessa o carrinho
         Then o produto "Sauce Labs Bike Light" deve estar presente no carrinho

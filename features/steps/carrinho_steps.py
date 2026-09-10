@@ -6,9 +6,14 @@ from tests.pages.login_page import LoginPage
 
 
 @then('o produto "{nome_produto}" deve estar presente no carrinho')
-def step_validate_product_in_cart(context, nome_produto):
+def validate_product_in_cart(context, nome_produto):
     context.cart_page = CartPage(context.driver)
-    assert context.cart_page.is_product_in_cart(nome_produto), f"O produto '{nome_produto}' não está presente no carrinho."     
+    
+    is_present = context.cart_page.is_product_in_cart(nome_produto)
+    
+    # Se is_present for False, exibe mensagem exibindo os itens que realmente estavam na tela
+    items_found = context.cart_page.get_all_cart_item_names()
+    assert is_present, f"O produto '{nome_produto}' não foi encontrado no carrinho! Itens presentes: {items_found}"
 
 @when("o usuário remove o produto do carrinho")
 def step_remove_product_from_cart(context):
@@ -30,5 +35,12 @@ def step_continue_shopping(context):
 @then("deve ser redirecionado de volta para a página de inventário")
 def step_validate_return_to_inventory(context):
     assert "inventory" in context.driver.current_url
+
+@when("o usuário retorna para a página de produtos")
+def step_return_to_inventory(context):
+    context.inventory_page = InventoryPage(context.driver)
+    context.inventory_page.open_sidebar_menu()
+    context.inventory_page.click_all_items_option()   
+    assert "inventory" in context.driver.current_url    
 
 

@@ -32,18 +32,15 @@ class InventoryPage(BasePage):
         product_locator = (By.XPATH, f"//div[@data-test='inventory-item-name' and text()='{product_name}']")
         self.add_to_cart_button(product_name)
         
-    def remove_product(self, product_name: str):
+    def remove_product_by_name(self, product_name: str):
         product_locator = (By.XPATH, f"//div[@data-test='inventory-item-name' and text()='{product_name}']")
         self.click(*self.BTN_REMOVE_TO_CART)
 
-    def get_cart_quantity(self) -> str:
-        try:
-            return self.get_text(*self.CART_COUNT).strip()
-        except Exception:
-            return "0"  # Retorna "0" se o elemento não for encontrado
-
-    def is_cart_empty(self) -> bool:
-        return self.get_cart_quantity() == "0"
+    def remove_product(self):
+        self.driver.implicitly_wait(2)  # Aguarda até que o elemento esteja presente
+        remove_buttons = self.driver.find_elements(*self.BTN_REMOVE_TO_CART)
+        for button in remove_buttons:
+            button.click()
     
 
     def clicar_filtro(self):
@@ -64,5 +61,12 @@ class InventoryPage(BasePage):
 
     def click_sidebar_option(self):
         option_locator = (By.ID, "reset_sidebar_link")
-        self.driver.implicitly_wait(5)  # Aguarda até que o elemento esteja presente
+        self.driver.implicitly_wait(2)  # Aguarda até que o elemento esteja presente
         self.click(*option_locator)
+
+    def click_all_items_option(self):
+        option_locator = (By.ID, "inventory_sidebar_link")
+        self.driver.implicitly_wait(2)  # Aguarda até que o elemento esteja presente
+        self.click(*option_locator)
+
+    

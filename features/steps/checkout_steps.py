@@ -18,8 +18,8 @@ def step_user_logged_in(context):
 def access_cart(context):
     context.cart_page = CartPage(context.driver)
     context.cart_page.access_cart()                                             
-    assert "cart" in context.driver.current_url
-
+    assert "cart" in context.driver.current_url 
+    
 
 
 @when("o usuário inicia o checkout")
