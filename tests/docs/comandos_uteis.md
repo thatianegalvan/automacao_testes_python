@@ -2,19 +2,18 @@
 
 Este documento reúne os principais comandos utilizados no dia a dia do desenvolvimento, execução de testes automatizados com Behave e controle de versão com Git.
 
----
 
 ## 1. Execução de Testes (Behave & Python)
 
 ### Ativação do Ambiente Virtual
 
-# Ativar o venv no Linux/macOS
+## Ativar o venv no Linux/macOS
 source venv/bin/activate
 
-# Executar todas as features do projeto
+## Executar todas as features do projeto
 behave
 
-# Executar apenas uma feature específica
+## Executar apenas uma feature específica
 behave features/login.feature
 behave features/checkout.feature
 
@@ -68,4 +67,8 @@ pkill -f opencode
 
 # Matar processo que esteja utilizando uma porta específica (ex: porta 4096)
 fuser -k 4096/tcp
+
+## Reiniciar o VS Code 
+Use o comando Ctrl + Shift + P no VS Code.
+Digite e selecione: Developer: Reload Window (ou simplesmente feche e abra o VS Code).
 

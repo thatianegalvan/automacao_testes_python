@@ -5,22 +5,10 @@ from tests.pages.inventory_page import InventoryPage
 from tests.pages.login_page import LoginPage
 
 
-@given("que o usuário está logado e possui um produto no carrinho")
-def step_user_with_product_in_cart(context):
-    context.login_page = LoginPage(context.driver)
-    context.login_page.open()
-    context.login_page.login("standard_user", "secret_sauce")
-
-    context.inventory_page = InventoryPage(context.driver)
-    context.inventory_page.add_backpack_to_cart()
-
-
-@when("o usuário navega até a página do carrinho")
-def step_navigate_to_cart(context):
-    context.inventory_page.open_cart()
+@then('o produto "{nome_produto}" deve estar presente no carrinho')
+def step_validate_product_in_cart(context, nome_produto):
     context.cart_page = CartPage(context.driver)
-    assert "cart" in context.driver.current_url
-
+    assert context.cart_page.is_product_in_cart(nome_produto), f"O produto '{nome_produto}' não está presente no carrinho."     
 
 @when("o usuário remove o produto do carrinho")
 def step_remove_product_from_cart(context):

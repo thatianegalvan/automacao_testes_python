@@ -14,16 +14,12 @@ def step_user_logged_in(context):
     assert "inventory" in context.driver.current_url
 
 
-@when("o usuário adiciona um produto ao carrinho")
-def step_add_product_to_cart(context):
-    context.inventory_page = InventoryPage(context.driver)
-    context.inventory_page.add_product()
-
-
 @when("o usuário acessa o carrinho")
-def step_access_cart(context):
-    context.inventory_page.open_cart()
+def access_cart(context):
+    context.cart_page = CartPage(context.driver)
+    context.cart_page.access_cart()                                             
     assert "cart" in context.driver.current_url
+
 
 
 @when("o usuário inicia o checkout")
@@ -32,12 +28,10 @@ def step_start_checkout(context):
     context.cart_page.click_checkout()
     assert "checkout-step-one" in context.driver.current_url
 
-
-@when("o usuário preenche nome, sobrenome e CEP")
-def step_fill_checkout_information(context):
+@then('o usuário preenche nome "{nome}", sobrenome "{sobrenome}" e CEP "{cep}"')
+def step_fill_checkout_information(context, nome, sobrenome, cep):
     context.checkout_page = CheckoutPage(context.driver)
-    context.checkout_page.fill_form("Teste", "Teste", "12345")
-    context.checkout_page.continue_checkout()
+    context.checkout_page.fill_form(nome, sobrenome, cep)
     assert "checkout-step-two" in context.driver.current_url
 
 

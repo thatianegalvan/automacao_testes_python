@@ -3,7 +3,7 @@ from guara import it
 import pytest
 from tests.transactions.login_transaction import (LoginTransaction)
 from tests.transactions.add_to_cart_transaction import ( AddToCartTransaction)
-from tests.transactions.remove_from_cart_transation import (RemoveFromCartTransaction)
+from tests.transactions.remove_from_cart_transaction import (RemoveFromCartTransaction)
 
 @pytest.mark.regression
 def test_adicionar_item_ao_carrinho(driver):
