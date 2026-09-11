@@ -1,7 +1,7 @@
 from guara.application import Application
 from guara import it
 import pytest
-from tests.transactions.login_transaction import (LoginTransaction)
+from tests.transactions.login_transaction import (LoginWith)
 from tests.transactions.add_to_cart_transaction import ( AddToCartTransaction)
 from tests.transactions.remove_from_cart_transaction import (RemoveFromCartTransaction)
 
@@ -11,7 +11,7 @@ def test_adicionar_item_ao_carrinho(driver):
     app = Application(driver)
 
     app.given(
-        LoginTransaction,
+        LoginWith,
         url="https://www.saucedemo.com",
         user="standard_user",
         password="secret_sauce"
@@ -34,7 +34,7 @@ def test_remover_item_do_carrinho(driver):
     app = Application(driver)
 
     app.given(
-        LoginTransaction,
+        LoginWith,
         url="https://www.saucedemo.com",
         user="standard_user",
         password="secret_sauce"

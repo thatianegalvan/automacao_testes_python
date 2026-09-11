@@ -2,6 +2,7 @@ from guara.transaction import AbstractTransaction
 from tests.pages.login_page import LoginPage
 
 
+
 class LoginWith(AbstractTransaction):
 
     def do(self, url, user, password):
