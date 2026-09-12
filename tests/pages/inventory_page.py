@@ -41,10 +41,9 @@ class InventoryPage(BasePage):
         self.click(*self.BTN_REMOVE_TO_CART)
 
     def remove_product(self):
-        self.driver.implicitly_wait(2) 
         remove_buttons = self.driver.find_elements(*self.BTN_REMOVE_TO_CART)
-       
-
+        self.driver.implicitly_wait(2) 
+        self.click(*self.BTN_REMOVE_TO_CART)
     
     def clicar_filtro(self):
         self.click(*self.FILTRO) 
