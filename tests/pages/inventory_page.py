@@ -44,6 +44,15 @@ class InventoryPage(BasePage):
         remove_buttons = self.driver.find_elements(*self.BTN_REMOVE_TO_CART)
         self.driver.implicitly_wait(2) 
         self.click(*self.BTN_REMOVE_TO_CART)
+
+    def remove_all_products(self):
+
+        while True:
+            remove_buttons = self.driver.find_elements(By.XPATH, "//button[starts-with(@id, 'remove-')]")
+
+            if not remove_buttons:
+                break
+            remove_buttons[0].click()    
     
     def clicar_filtro(self):
         self.click(*self.FILTRO) 

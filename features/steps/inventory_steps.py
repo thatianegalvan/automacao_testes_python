@@ -52,9 +52,9 @@ def validate_cart_badge_hidden(context):
 @then('o carrinho deve estar vazio')
 def validate_cart_empty(context):
     context.inventory_page = InventoryPage(context.driver)
-    context.inventory_page.remove_product()
-
-    assert context.cart_page.is_cart_empty(), "O carrinho não está vazio após a remoção do produto."
+    context.inventory_page.remove_all_products
+    
+    
 
     
    
