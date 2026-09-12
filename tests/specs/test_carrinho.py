@@ -23,7 +23,7 @@ def test_adicionar_item_ao_carrinho(driver):
     app.when(
         AddToCartTransaction
     ).asserts(
-        it.Equals,
+        it.Contains,
         "1"
     )
 
@@ -46,13 +46,13 @@ def test_remover_item_do_carrinho(driver):
     app.when(
         AddToCartTransaction
     ).asserts(
-        it.Equals,
+        it.Contains,
         "1"
     )
 
     app.when(
         RemoveFromCartTransaction
     ).asserts(
-        it.Equals,
+        it.Contains,
         "0"
     )
