@@ -4,19 +4,17 @@ from tests.pages.inventory_page import InventoryPage
 
 class RemoveFromCartTransaction(AbstractTransaction):
 
-    def __init__(self, app):
+    def do(self, app):
 
-        self.driver = app.driver
+        self.driver = app
 
-        pagina = InventoryPage(
-            self.driver
-        )
-
+        pagina = InventoryPage(self.driver)
         pagina.remove_product()
 
         self.resultado = (
             pagina.is_cart_badge_displayed()
         )
+        
 
     def value(self):
         return self.resultado
