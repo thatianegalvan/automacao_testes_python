@@ -6,7 +6,7 @@ class RemoveFromCartTransaction(AbstractTransaction):
 
     def do(self):
 
-        pagina = InventoryPage(self.driver)
+        pagina = InventoryPage(self._driver)
         pagina.remove_product()
 
         self.resultado = (
