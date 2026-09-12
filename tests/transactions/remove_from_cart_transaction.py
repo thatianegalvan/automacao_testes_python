@@ -4,10 +4,6 @@ from tests.pages.inventory_page import InventoryPage
 
 class RemoveFromCartTransaction(AbstractTransaction):
 
-    def __init__(self, driver):
-        super().__init__()
-        self.driver = driver
-
     def do(self):
 
         pagina = InventoryPage(self.driver)
@@ -16,7 +12,7 @@ class RemoveFromCartTransaction(AbstractTransaction):
         self.resultado = (
             pagina.is_cart_badge_displayed()
         )
-        
-
-    def value(self):
+        return self._driver.current_url
+    
+    def get_result(self):
         return self.resultado
