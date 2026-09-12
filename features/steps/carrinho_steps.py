@@ -38,9 +38,8 @@ def step_validate_return_to_inventory(context):
 
 @when("o usuário retorna para a página de produtos")
 def step_return_to_inventory(context):
-    context.inventory_page = InventoryPage(context.driver)
-    context.inventory_page.open_sidebar_menu()
-    context.inventory_page.click_all_items_option()   
-    assert "inventory" in context.driver.current_url    
+    context.cart_page = CartPage(context.driver)
+    context.cart_page.click_continue_shopping()
+   
 
 

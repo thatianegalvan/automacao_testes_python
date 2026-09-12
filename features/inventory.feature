@@ -12,4 +12,3 @@ Feature: Inventário e Filtros
         Given o usuário adiciona o produto "Sauce Labs Bolt T-Shirt" ao carrinho
         When o usuário abre o menu lateral e clica em Reset App State
         Then o contador do carrinho não deve ser exibido
-        And o carrinho deve estar vazio

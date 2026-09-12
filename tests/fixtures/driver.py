@@ -16,7 +16,6 @@ def driver():
 
 def driver_func():
     chrome_options = Options()
-    # ✅ Perfil limpo e isolado (ESSENCIAL!!!)
     user_data_dir = tempfile.mkdtemp()
     chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
     chrome_options.add_argument("--headless")
@@ -24,26 +23,20 @@ def driver_func():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1920,1080")
 
-    # ✅ Desativa Password Manager convencional
+
     prefs = {
         "credentials_enable_service": False,
         "profile.password_manager_enabled": False,
-        # ✅ 🔥 DESATIVA DETECÇÃO DE VAZAMENTO (AQUI ESTÁ O SEGREDO)
         "profile.password_manager_leak_detection": False,
     }
     chrome_options.add_experimental_option("prefs", prefs)
-
-    # ✅ Desativa Safe Browsing (remove alertas de segurança)
     chrome_options.add_argument("--disable-features=PasswordLeakDetection")
     chrome_options.add_argument("--safebrowsing-disable-leak-detection")
-
-    # ✅ Hardening adicional
     chrome_options.add_argument("--disable-notifications")
     chrome_options.add_argument("--disable-infobars")
     chrome_options.add_argument("--disable-extensions")
 
     driver = webdriver.Chrome(options=chrome_options)
-
     driver.maximize_window()
     return driver
  

@@ -5,12 +5,17 @@ class CartPage(BasePage):
     CHECKOUT = (By.ID, "checkout")
     CART = (By.ID, "shopping_cart_container")
     ITEMS_NAMES = (By.XPATH, "//*[@data-test='inventory-item-name']")
+    CONTINUE_SHOPPING = (By.ID, "continue-shopping")
 
     def start_checkout(self):
         self.click(*self.CHECKOUT)
 
     def click_checkout(self):
-        self.start_checkout()
+        self.click(*self.CHECKOUT)
+       # self.start_checkout()
+
+    def click_continue_shopping(self):
+        self.click(*self.CONTINUE_SHOPPING)    
 
     def is_cart_empty(self):
       #  return "Your cart is empty" in self.driver.page_source
@@ -48,3 +53,5 @@ class CartPage(BasePage):
         """
         cart_items = self.driver.find_elements(*self.ITEMS_NAMES)
         return [item.text.strip() for item in cart_items]
+
+    

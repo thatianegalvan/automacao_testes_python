@@ -1,5 +1,8 @@
+
+
 from behave import given, when, then
 
+from tests.pages.cart_page import CartPage
 from tests.pages.inventory_page import InventoryPage
 
 @when('o usuário seleciona a ordenação "{opcao}"')
@@ -23,7 +26,7 @@ def validate_first_product_price(context, preco):
 @given('o usuário adiciona o produto "{nome_produto}" ao carrinho')
 def step_add_product_to_cart(context, nome_produto):
     context.inventory_page = InventoryPage(context.driver)
-    context.inventory_page.add_product_by_name(nome_produto) 
+    context.inventory_page.add_product_by_name(nome_produto)
     print(f"Produto '{nome_produto}' adicionado ao carrinho com sucesso.")   
 
 @when('o usuário abre o menu lateral e clica em Reset App State')
@@ -31,6 +34,7 @@ def click_sidebar_option(context):
     context.inventory_page = InventoryPage(context.driver)
     context.inventory_page.open_sidebar_menu()
     context.inventory_page.click_sidebar_option()
+    context.inventory_page.click_open_sidebar_menu()  # Fecha o menu lateral após clicar na opção
 
 
 @when('o usuário abre o menu lateral e clica em All Items')
@@ -42,7 +46,7 @@ def click_sidebar_option(context):
 @then('o contador do carrinho não deve ser exibido')
 def validate_cart_badge_hidden(context):
     context.inventory_page = InventoryPage(context.driver)
-    context.inventory_page.is_cart_empty()
+    assert not context.inventory_page.is_cart_badge_displayed(), "O contador do carrinho está visível, mas não deveria estar."
 
 
 @then('o carrinho deve estar vazio')

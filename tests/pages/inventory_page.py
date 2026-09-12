@@ -1,11 +1,11 @@
-from os import wait
+
+import time
 
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
-
-
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
+
 
 
 class InventoryPage(BasePage):
@@ -16,7 +16,10 @@ class InventoryPage(BasePage):
     BTN_ADD_TO_CART = (By.XPATH, "//button[contains(@id, 'add-to-cart')]")
     BTN_REMOVE_TO_CART = (By.XPATH, "//button[contains(@id, 'remove')]")
     CART_COUNT = (By.CLASS_NAME, "shopping_cart_badge")
-
+    CROSS_BUTTON = (By.ID, "react-burger-cross-btn")
+    BURGER_MENU_BUTTON = (By.ID, "react-burger-menu-btn")
+    RESET_APP_STATE_LINK = (By.ID, "reset_sidebar_link")
+    CART_BADGE = (By.CLASS_NAME, "shopping_cart_badge")
     
     def is_loaded(self):
         return "/inventory.html" in self.driver.current_url
@@ -29,9 +32,10 @@ class InventoryPage(BasePage):
         return (By.ID, f"remove-{formatted_name}")
 
     def add_product_by_name(self, product_name: str):
-        product_locator = (By.XPATH, f"//div[@data-test='inventory-item-name' and text()='{product_name}']")
-        self.add_to_cart_button(product_name)
-        
+        xpath = f"//div[@data-test='inventory-item-name' and text()='{product_name}']/ancestor::div[@data-test='inventory-item']//button"
+        time.sleep(2)  # Aguarda 1 segundo para garantir que o elemento esteja presente
+        self.click(By.XPATH, xpath)  
+        time.sleep(2)
     def remove_product_by_name(self, product_name: str):
         product_locator = (By.XPATH, f"//div[@data-test='inventory-item-name' and text()='{product_name}']")
         self.click(*self.BTN_REMOVE_TO_CART)
@@ -64,9 +68,19 @@ class InventoryPage(BasePage):
         self.driver.implicitly_wait(2)  # Aguarda até que o elemento esteja presente
         self.click(*option_locator)
 
+    def click_open_sidebar_menu(self): 
+        self.click(*self.CROSS_BUTTON)   
+
     def click_all_items_option(self):
         option_locator = (By.ID, "inventory_sidebar_link")
-        self.driver.implicitly_wait(2)  # Aguarda até que o elemento esteja presente
+        self.driver.implicitly_wait(2) 
         self.click(*option_locator)
 
-    
+    def reset_app_state(self):
+        self.click(*self.BURGER_MENU_BUTTON)
+        self.click(*self.RESET_APP_STATE_LINK)
+
+    def is_cart_badge_displayed(self) -> bool:
+        """Verifica se o contador vermelho do carrinho está visível no DOM."""
+        elements = self.driver.find_elements(*self.CART_BADGE)
+        return len(elements) > 0 and elements[0].is_displayed()

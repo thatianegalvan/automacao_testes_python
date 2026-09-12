@@ -16,9 +16,9 @@ class CheckoutPage(BasePage):
         self.type(*self.LAST_NAME, last)
         self.type(*self.POSTAL_CODE, zip_code)
 
-    def continue_checkout(self):
+    def btn_continue_checkout(self):
         self.click(*self.CONTINUE)
-    def finish(self):
+    def btn_finish(self):
         self.click(*self.FINISH)
     def get_success_message(self):
         return self.get_text(*self.SUCCESS_MSG)
