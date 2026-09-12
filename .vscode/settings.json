@@ -21,9 +21,9 @@
         "xRay-self"
     ],
     "cucumber.features": [
-        "features/*.feature"
+        "tests/features/**/*.feature"
     ],
     "cucumber.glue": [
-        "features/steps/*.py"
+        "tests/features/steps/**/*.py"
     ]
 }
