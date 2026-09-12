@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class BasePage:
 
     def __init__(self, driver):
@@ -32,3 +33,4 @@ def Eelement_to_be_clickable(by, value):
     from selenium.webdriver.support import expected_conditions as EC
 
     return EC.element_to_be_clickable((by, value))
+
