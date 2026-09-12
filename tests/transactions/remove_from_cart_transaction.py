@@ -12,10 +12,10 @@ class RemoveFromCartTransaction(AbstractTransaction):
             self.driver
         )
 
-        pagina.remover_produto()
+        pagina.remove_product()
 
         self.resultado = (
-            pagina.obter_quantidade_carrinho()
+            pagina.is_cart_badge_displayed()
         )
 
     def value(self):

@@ -11,6 +11,6 @@ class CheckoutTransaction(AbstractTransaction):
 
         checkout = CheckoutPage(self._driver)
         checkout.fill_form(name, last, zip_code)
-        checkout.continue_checkout()
+        checkout.btn_continue_checkout()
 
         return self._driver.current_url

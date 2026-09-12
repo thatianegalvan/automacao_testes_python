@@ -6,6 +6,6 @@ class FinishOrderTransaction(AbstractTransaction):
 
     def do(self):
         checkout = CheckoutPage(self._driver)
-        checkout.finish()
+        checkout.btn_finish()
 
         return checkout.get_success_message()

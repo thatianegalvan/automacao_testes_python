@@ -33,20 +33,19 @@ class InventoryPage(BasePage):
 
     def add_product_by_name(self, product_name: str):
         xpath = f"//div[@data-test='inventory-item-name' and text()='{product_name}']/ancestor::div[@data-test='inventory-item']//button"
-        time.sleep(2)  # Aguarda 1 segundo para garantir que o elemento esteja presente
+        self.driver.implicitly_wait(2)
         self.click(By.XPATH, xpath)  
-        time.sleep(2)
+
     def remove_product_by_name(self, product_name: str):
         product_locator = (By.XPATH, f"//div[@data-test='inventory-item-name' and text()='{product_name}']")
         self.click(*self.BTN_REMOVE_TO_CART)
 
     def remove_product(self):
-        self.driver.implicitly_wait(2)  # Aguarda até que o elemento esteja presente
+        self.driver.implicitly_wait(2) 
         remove_buttons = self.driver.find_elements(*self.BTN_REMOVE_TO_CART)
         for button in remove_buttons:
             button.click()
     
-
     def clicar_filtro(self):
         self.click(*self.FILTRO) 
 
@@ -84,3 +83,10 @@ class InventoryPage(BasePage):
         """Verifica se o contador vermelho do carrinho está visível no DOM."""
         elements = self.driver.find_elements(*self.CART_BADGE)
         return len(elements) > 0 and elements[0].is_displayed()
+
+    def go_to_cart(self):
+        self.click(*self.CART)
+
+    def add_product(self):
+        self.click(*self.BTN_ADD_TO_CART)
+
