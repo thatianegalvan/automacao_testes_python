@@ -4,9 +4,7 @@ from tests.pages.inventory_page import InventoryPage
 
 class RemoveFromCartTransaction(AbstractTransaction):
 
-    def do(self, app):
-
-        self.driver = app
+    def do(self):
 
         pagina = InventoryPage(self.driver)
         pagina.remove_product()
